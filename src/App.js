@@ -50,6 +50,7 @@ const App = () => {
             data_url="Layouts/Data.json"
             exportpdf_url="http://localhost:8000/getpdf"
             exportpdf_type="Cfg,Def,Cols,All"
+            refs={Grid}
           ></treegrid>
         </div>
       </div>

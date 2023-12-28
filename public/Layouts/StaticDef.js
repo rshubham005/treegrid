@@ -41,7 +41,7 @@ Def: {
    // Action suppresses adding new rows when grid is grouped by another column than Partner
         
    Group: { 
-      CanFilter:'2', Calculated:'1', CalcOrder:'O,I,E,G,D,F,B', OCanEdit:'1', ICanEdit:'0', ECanEdit:'0',
+      CanFilter:'2', Calculated:'1', CalcOrder:'O,I,E,G,D,F,B',ZCanEdit:'1',YCanEdit:'1', OCanEdit:'1', ICanEdit:'0', ECanEdit:'0', 
       OFormula:'sum()', IFormula:'sum()', EFormula:'sum()', GFormula:'sum()', DFormula:'sum()', FFormula:'sum()',
       OnGroup:'Grid.Adding=0;' },
 
@@ -141,13 +141,16 @@ Cols: [
    { Name:'S', Width:'70', Type:'Enum', Related:'R,C', Group:'1', GroupEmpty:'0', IntFormat:'(unknown)',
      Enum4_14:"|Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming"
      },
-
+     {Name:'Z',Type:'Text',Width:'100',
+   //   ResultMask:'^(?=.*w)(?=.*s).{5,}$',
+   SearchText   :'1'},
+     {Name:'Y',Type:'Html',Width:'100'},
    { Name:'X', Width:'95', Type:'Bool', Format:'||x'}, // Registered
    { Name:'N', Width:'105', Type:'Date', Format:'yyyy.mm.dd' }, // Since
    { Name:'A', Width:'80', Type:'Enum', Enum:'|week|month|quarter|half year|year' }, // Calls per
    { Name:'B', Width:'70', Type:'Int' }, // Rabat
 
-   { Name:'O', Width:'70', Type:'Int' ,Wrap:'1' }, // Orders
+   { Name:'O', Width:'70', Type:'Text' ,Wrap:'1' ,Visible:'1' }, // Orders
    { Name:'I', Width:'90', Type:'Float', Format:'0.00',OnRightClickCell:'alert("hello")' }, // Income
    { Name:'E', Width:'90', Type:'Float', Format:'0.00' }, // Expenses
    { Name:'G', Width:'100', Type:'Float', Format:',0.00', Formula:'I-E' }, // Gross profit
@@ -163,7 +166,7 @@ Header: {
    R:'Region', C:'Country', S:'State', P:'Partner', M:'Month',
    X:'Registered', N:'Since', A:'Calls per', O:'Orders',
    I:'Income', E:'Expenses', G:'Gross profit', B:'Rabat', D:'Discount',
-   F:'Profit' 
+   F:'Profit' , Y:'Html',Z:'Regex'
    },
 Head : [
    // Filter row - to let user choose filter, changes filtering of area enums by selection only
