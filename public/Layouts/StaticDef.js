@@ -1,36 +1,36 @@
 {
-Cfg : {
-   CfgId:"Static", //  Grid identification for saving configuration to cookies
-   PrintLoad:"1", PrintCols:"2", PrintLocation:"3", PrintPageBreaks:"1", PrintRows:"50", // Printing options, download all rows for printing
-   Paging:'2', ChildPaging:'2', // Both paging set to server
-   ChildPageLength:"20", // Server paging for child pages, splits children to given number of rows and loads them separately when they become visible due scroll
-   SaveSession:'1', // Stores IO Session to cookies to identify the client on server and access appropriate grid instance
-   Prepared:'1', // DLL sends data prepared, so you can set this attribute to speed up loading
-   ShowDeleted:'0', // This example hides deleted row instead of coloring them red
-   MaxHeight:'1', // Grid maximizes height of the main tag on page
-   LimitScroll:"23", MinBodyRows:"6",  // Responsive design, for small windows sets NoVScroll and NoHScroll
-   Sort:'P,M', // To sort grid according to partner and Month for first time (when no configuration saved)
-   MaxGroupLength:'0', // Suppresses dividing rows to more groups when grouping because it is controlled by MaxChildren of all rows
-   Group:'P', // To group grid by partner for first time (when no configuration saved)
-   GroupRestoreSort:'1', // Restores sorting state after grouping that was before grouping
-   GroupSortMain:'1', // When grouping always sorts according to main column ascending
-   Adding:'0' , // Suppress adding new rows when grid is not grouped
-   FilterEmpty:'1', // When filtering, hides group rows that have all children hidden, see the Group row have set CanFilter:'2'
-   IndexEnum:'1', // All enums are set by index
-   NameCol:'P', // Row will be identifies by Partner name in messages (e.g. in deleting rows)
-   ExportFormat:'XLS', // Predefined export format is XLS, because XLSX is not supported by the DLL
-   Size:'Low',// Smaller style size because of large grid
-   },
-Actions: { 
-   OnUngroup:'Grid.Adding=0;',  // Suppress adding new rows when grid is not grouped
-   // OnRightClickCell:()=>{testing()} // Custom event handler, shows the calling method of the framework component; Shows some custom popup menu on right click to any cell
-   }, 
-Lang: { 
-   MenuExport: { ExportFormats:'XLS,CSV' },   // Listed only XLS and CSV, because XLSX is not supported by the DLL
-   Alert: { ErrAdd:'Cannot add new partner here!' } // Changes text of adding error message
-   }, 
-Root: { AcceptDef:'' }, // By default (when no grouping is active) rows cannot be added or moved
-
+   Cfg : {
+      CfgId:"Static", //  Grid identification for saving configuration to cookies
+      PrintLoad:"1", PrintCols:"2", PrintLocation:"3", PrintPageBreaks:"1", PrintRows:"50", // Printing options, download all rows for printing
+      Paging:'2', ChildPaging:'2', // Both paging set to server
+      ChildPageLength:"20", // Server paging for child pages, splits children to given number of rows and loads them separately when they become visible due scroll
+      SaveSession:'1', // Stores IO Session to cookies to identify the client on server and access appropriate grid instance
+      Prepared:'1', // DLL sends data prepared, so you can set this attribute to speed up loading
+      ShowDeleted:'0', // This example hides deleted row instead of coloring them red
+      MaxHeight:'1', // Grid maximizes height of the main tag on page
+      LimitScroll:"23", MinBodyRows:"6",  // Responsive design, for small windows sets NoVScroll and NoHScroll
+      Sort:'P,M', // To sort grid according to partner and Month for first time (when no configuration saved)
+      MaxGroupLength:'0', // Suppresses dividing rows to more groups when grouping because it is controlled by MaxChildren of all rows
+      Group:'P', // To group grid by partner for first time (when no configuration saved)
+      GroupRestoreSort:'1', // Restores sorting state after grouping that was before grouping
+      GroupSortMain:'1', // When grouping always sorts according to main column ascending
+      Adding:'0' , // Suppress adding new rows when grid is not grouped
+      FilterEmpty:'1', // When filtering, hides group rows that have all children hidden, see the Group row have set CanFilter:'2'
+      IndexEnum:'1', // All enums are set by index
+      NameCol:'P', // Row will be identifies by Partner name in messages (e.g. in deleting rows)
+      ExportFormat:'XLS', // Predefined export format is XLS, because XLSX is not supported by the DLL
+      Size:'Low' // Smaller style size because of large grid
+      },
+   Actions: { 
+      OnUngroup:'Grid.Adding=0;',  // Suppress adding new rows when grid is not grouped
+      OnRightClickCell:'Grid.Component.showCustomMenu(Row,Col)' // Custom event handler, shows the calling method of the framework component; Shows some custom popup menu on right click to any cell
+      }, 
+   Lang: { 
+      MenuExport: { ExportFormats:'XLS,CSV' },   // Listed only XLS and CSV, because XLSX is not supported by the DLL
+      Alert: { ErrAdd:'Cannot add new partner here!' } // Changes text of adding error message
+      }, 
+   Root: { AcceptDef:'' }, // By default (when no grouping is active) rows cannot be added or moved
+   
 Def: {
    // Base row settings,  AcceptDef='' means that no rows can be added or moved to children of the row
    R: { CanEdit:'0', OCanEdit:'1', ICanEdit:'1', ECanEdit:'1', CalcOrder:'G,D,F' },
@@ -43,7 +43,7 @@ Def: {
    Group: { 
       CanFilter:'2', Calculated:'1', CalcOrder:'O,I,E,G,D,F,B',ZCanEdit:'1',YCanEdit:'1', OCanEdit:'1', ICanEdit:'0', ECanEdit:'0', 
       OFormula:'sum()', IFormula:'sum()', EFormula:'sum()', GFormula:'sum()', DFormula:'sum()', FFormula:'sum()',
-      OnGroup:'Grid.Adding=0;' },
+      OnGroup:'Grid.Adding=0;',TMenu:'2' },
 
    // Group row created when grouping by partner (set by GroupCol attribute) 
    // GroupCols tells that this default row is used only when grid is grouped by Region, Country, State, Partner in that order
@@ -143,7 +143,7 @@ Cols: [
      },
      {Name:'Z',Type:'Text',Width:'100',
    //   ResultMask:'^(?=.*w)(?=.*s).{5,}$',
-   SearchText   :'1'},
+   LocaleCompare    :'1'},
      {Name:'Y',Type:'Html',Width:'100'},
    { Name:'X', Width:'95', Type:'Bool', Format:'||x'}, // Registered
    { Name:'N', Width:'105', Type:'Date', Format:'yyyy.mm.dd' }, // Since
