@@ -19,7 +19,9 @@
       IndexEnum:'1', // All enums are set by index
       NameCol:'P', // Row will be identifies by Partner name in messages (e.g. in deleting rows)
       ExportFormat:'XLS', // Predefined export format is XLS, because XLSX is not supported by the DLL
-      Size:'Low' // Smaller style size because of large grid
+      Size:'Low', // Smaller style size because of large grid
+      Searching   :"1",
+      Language:'DE'
       },
    Actions: { 
       OnUngroup:'Grid.Adding=0;',  // Suppress adding new rows when grid is not grouped
@@ -176,7 +178,8 @@ Head : [
       RFilterOff:'(all)', RCanEmpty:'1', RShowMenu:'0',
       CFilterOff:'(all)', CCanEmpty:'1', CShowMenu:'0', 
       SFilterOff:'(all)', SCanEmpty:'1', SShowMenu:'0',
-      MCanEmpty:'1'
+      MCanEmpty:'1',
+      ZFilterOff:'(all)', ZCanEmpty:'1', ZShowMenu:'1',
       },
       { Kind:'Search', CanEdit:'1',    MCanEmpty:'1'
       }

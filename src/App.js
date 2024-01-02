@@ -9,11 +9,11 @@ class App extends React.Component {
   constructor() {
     super();
     var Component = this;
-    window.Grids.OnInit = function(grid) {
+    window.Grids.OnInit = function (grid) {
       grid.Component = Component;
       Component.Grid = grid;
     };
-    window.Grids.OnLoadError = function(grid) {
+    window.Grids.OnLoadError = function (grid) {
       alert(
         "TreeGrid cannot load!\nCheck if the NodeJS server runs on the url http://localhost:8000\nThe sample NodeJS server is located in /ExamplesNode/Server"
       );
@@ -45,25 +45,25 @@ class App extends React.Component {
       Items: [
         {
           Name: row.Deleted ? "Undelete row" : "Delete row",
-          OnClick: function() {
+          OnClick: function () {
             G.DeleteRow(row, row.Deleted ? 3 : 1);
           },
         },
         {
           Name: row.Selected ? "Deselect row" : "Select row",
-          OnClick: function() {
+          OnClick: function () {
             G.SelectRow(row);
           },
         },
         {
           Name: "Copy row",
-          OnClick: function() {
+          OnClick: function () {
             G.CopyRow(row, null, row, 1, 0);
           },
         },
         {
           Name: "Add new row",
-          OnClick: function() {
+          OnClick: function () {
             G.AddRow(null, row, 1);
           },
         },
@@ -71,7 +71,10 @@ class App extends React.Component {
     });
     return 1;
   }
-
+  handlebutton(row){
+    var G = this.Grid;
+    G.AddRow(null, row, 1);
+  }
   // Renders the whole sample page
   render() {
     return (
@@ -80,6 +83,7 @@ class App extends React.Component {
 
         <div className="ExampleBorder">
           {/* TreeGrid main tag, it will contain the grid */}
+          <button onClick={this.handlebutton}>Add new Row</button>
           <div
             className="ExampleMain"
             style={{ width: "100%", height: "530px" }}
@@ -95,6 +99,7 @@ class App extends React.Component {
               id="SampleGrid"
               layout_url="Layouts/StaticDef.js"
               data_url="Layouts/Data.json"
+              DE_Url="Grid/Languages/TextDE.xml"
               exportpdf_url="http://localhost:8000/getpdf"
               exportpdf_type="Cfg,Def,Cols,All"
             ></treegrid>
