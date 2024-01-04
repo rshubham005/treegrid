@@ -927,15 +927,15 @@ TreeGridLoaded ({ /* JSONP header, to be possible to load from xxx_Jsonp data so
    }, 
 
    // Format configuration the same for all languages 
-   "Lang" : { 
-      "Format" : { 
-         "StrictNumbers": "0", "StrictDates": "15", "GMT": "1", "DateFormatLowercase": "1", "EditFormats": "", "ExactNumbers": "0", "BaseSeparators": "0", "Unsupported": "\\?", 
-         "Colors": ",#000,#FFF,#F00,#0F0,#00F,#FF0,#F0F,#0FF,#800,#080,#008,#880,#808,#088,#CCC,#888,#99F,#936,#FFC,#CFF,#606,#F88,#06C,#CCF,#008,#F0F,#FF0,#0FF,#808,#800,#088,#00F,#0CF,#CFF,#CFC,#FF9,#9CF,#F9C,#C9F,#FC9,#36F,#3CC,#9C0,#FC0,#F90,#F60,#669,#999,#036,#396,#030,#330,#930,#936,#339,#333", 
-         "ExportFilters": ",= ,\u2260 ,< ,\u2264 ,> ,\u2265 ,|* ,|- ,*| ,-| ,*|* ,-|- ", "ExportFiltersHtml": "<span style='color:red;'>%1</span>"  
-          }, 
-      "MenuExport" : { "ExportFormats": "XLSX,XLS,CSV"   }, 
-      "MenuPrint" : { "PDFFormats": "PDF"   }  
-   }, 
+   // "Lang" : { 
+   //    "Format" : { 
+   //       "StrictNumbers": "0", "StrictDates": "15", "GMT": "1", "DateFormatLowercase": "1", "EditFormats": "", "ExactNumbers": "0", "BaseSeparators": "0", "Unsupported": "\\?", 
+   //       "Colors": ",#000,#FFF,#F00,#0F0,#00F,#FF0,#F0F,#0FF,#800,#080,#008,#880,#808,#088,#CCC,#888,#99F,#936,#FFC,#CFF,#606,#F88,#06C,#CCF,#008,#F0F,#FF0,#0FF,#808,#800,#088,#00F,#0CF,#CFF,#CFC,#FF9,#9CF,#F9C,#C9F,#FC9,#36F,#3CC,#9C0,#FC0,#F90,#F60,#669,#999,#036,#396,#030,#330,#930,#936,#339,#333", 
+   //       "ExportFilters": ",= ,\u2260 ,< ,\u2264 ,> ,\u2265 ,|* ,|- ,*| ,-| ,*|* ,-|- ", "ExportFiltersHtml": "<span style='color:red;'>%1</span>"  
+   //        }, 
+   //    "MenuExport" : { "ExportFormats": "XLSX,XLS,CSV"   }, 
+   //    "MenuPrint" : { "PDFFormats": "PDF"   }  
+   // }, 
 
    // Configuration preset per CSS style 
    "Media" : [ 

@@ -2,7 +2,7 @@
    Cfg : {
       CfgId:"Static", //  Grid identification for saving configuration to cookies
       PrintLoad:"1", PrintCols:"2", PrintLocation:"3", PrintPageBreaks:"1", PrintRows:"50", // Printing options, download all rows for printing
-      Paging:'2', ChildPaging:'2', // Both paging set to server
+      Paging:'2', ChildPaging:'0', // Both paging set to server
       ChildPageLength:"20", // Server paging for child pages, splits children to given number of rows and loads them separately when they become visible due scroll
       SaveSession:'1', // Stores IO Session to cookies to identify the client on server and access appropriate grid instance
       Prepared:'1', // DLL sends data prepared, so you can set this attribute to speed up loading
@@ -21,12 +21,13 @@
       ExportFormat:'XLS', // Predefined export format is XLS, because XLSX is not supported by the DLL
       Size:'Low', // Smaller style size because of large grid
       Searching   :"1",
-      Language:'DE'
+      // Language:'DE'
       },
    Actions: { 
       OnUngroup:'Grid.Adding=0;',  // Suppress adding new rows when grid is not grouped
-      OnRightClickCell:'Grid.Component.showCustomMenu(Row,Col)' // Custom event handler, shows the calling method of the framework component; Shows some custom popup menu on right click to any cell
-      }, 
+      OnRightClickCell:'Grid.Component.showCustomMenu(Row,Col)', // Custom event handler, shows the calling method of the framework component; Shows some custom popup menu on right click to any cell
+      OnClickCell:'Grid.Component.handlebutton(Row,Col)'   
+   }, 
    Lang: { 
       MenuExport: { ExportFormats:'XLS,CSV' },   // Listed only XLS and CSV, because XLSX is not supported by the DLL
       Alert: { ErrAdd:'Cannot add new partner here!' } // Changes text of adding error message
@@ -113,15 +114,16 @@ LeftCols: [
 
    // Month, main column for grouping by partner, width 80px, when grouped 200px
    { Name:'M', Width:'80', GroupWidth:'210', Type:'Enum', Group:'1', Enum:'|01/2004|02/2004|03/2004|04/2004|05/2004|06/2004|07/2004|08/2004|09/2004|10/2004|11/2004|12/2004' }
-         
+   ,{ Name:'R', Width:'180', Type:'Enum', Refresh:'C,S', Group:'1',
+   Enum:'|Central & South Asia|East Asia & the Pacific|East Europe|Middle East & North Africa|North & Central America|South America|Sub-Saharan Africa|West Europe'
+   },  
+   { Name:'N', Width:'105', Type:'Date', Format:'yyyy.mm.dd' }, // Since
    ],
 
 Cols: [
 
    // Region
-   { Name:'R', Width:'180', Type:'Enum', Refresh:'C,S', Group:'1',
-     Enum:'|Central & South Asia|East Asia & the Pacific|East Europe|Middle East & North Africa|North & Central America|South America|Sub-Saharan Africa|West Europe'
-     },
+  
 
    // Country 
    //  The 'C' column is related to 'R' column, it contains only countries from selected region
@@ -144,13 +146,11 @@ Cols: [
      Enum4_14:"|Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming"
      },
      {Name:'Z',Type:'Text',Width:'100',
-   //   ResultMask:'^(?=.*w)(?=.*s).{5,}$',
+     ResultMask:'^(?=.*w)(?=.*s).{5,}$',
    LocaleCompare    :'1'},
      {Name:'Y',Type:'Html',Width:'100'},
-   { Name:'X', Width:'95', Type:'Bool', Format:'||x'}, // Registered
-   { Name:'N', Width:'105', Type:'Date', Format:'yyyy.mm.dd' }, // Since
-   { Name:'A', Width:'80', Type:'Enum', Enum:'|week|month|quarter|half year|year' }, // Calls per
-   { Name:'B', Width:'70', Type:'Int' }, // Rabat
+   { Name:'X', Width:'95', Type:'Bool', Format:'||x'}, // Registered // Calls per
+   { Name:'B', Width:'70', Type:'Int' }, // Rabat  
 
    { Name:'O', Width:'70', Type:'Text' ,Wrap:'1' ,Visible:'1' }, // Orders
    { Name:'I', Width:'90', Type:'Float', Format:'0.00',OnRightClickCell:'alert("hello")' }, // Income
@@ -160,7 +160,9 @@ Cols: [
    ],
 
  RightCols: [
-   { Name:'F', Width:'90', Type:'Float', Format:',0.00', Formula:'G-D' } // Profit
+   { Name:'F', Width:'90', Type:'Float', Format:',0.00', Formula:'G-D' }, // Profit
+   
+   { Name:'A', Width:'80', Type:'Enum', Enum:'|week|month|quarter|half year|year' },
    ],
 
 // Column captions
@@ -206,10 +208,12 @@ Solid: [
       Cols:'||P|R,C,S,P|R,C,S|M',
       ListCustom:'Other'
       }, 
+      { Kind:'Toolbar', Visible:'0' ,Space:'0'
+      }, 
 
    // Bottom simple pagers
-   { Space:'4', Cells:'Pager,Pages', MenuName:'Bottom pager', CanPrint:'0',
-      PagerType:'Pager', PagesLeft:'10', PagesType:'Pages', PagesRelWidth:'1', PagesCount:'10', PagesStep:'5'
+   { Space:'4', Cells:'Pager,Pages', MenuName:'Bottom pager',
+      PagerType:'Pager', PagesLeft:'10', 
       }
    ],
 Pager: { Width:'160', MenuName:'Right pager' }, // Right side pager
