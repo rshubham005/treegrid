@@ -15,7 +15,7 @@
       GroupRestoreSort:'1', // Restores sorting state after grouping that was before grouping
       GroupSortMain:'1', // When grouping always sorts according to main column ascending
       Adding:'0' , // Suppress adding new rows when grid is not grouped
-      FilterEmpty:'1', // When filtering, hides group rows that have all children hidden, see the Group row have set CanFilter:'2'
+      FilterEmpty:'0', // When filtering, hides group rows that have all children hidden, see the Group row have set CanFilter:'2'
       IndexEnum:'1', // All enums are set by index
       NameCol:'P', // Row will be identifies by Partner name in messages (e.g. in deleting rows)
       ExportFormat:'XLS', // Predefined export format is XLS, because XLSX is not supported by the DLL

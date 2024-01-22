@@ -8,7 +8,7 @@ class App extends React.Component {
   Grid = null;
   constructor() {
     super();
-    this.state = {Row:'' };
+    this.state = { Row: "", Col: "" };
     var Component = this;
     window.Grids.OnInit = function (grid) {
       grid.Component = Component;
@@ -24,13 +24,11 @@ class App extends React.Component {
   // Reloads the grid with given data and layout
   // Called on click to the example links to show given example
   // string example: the example name to read the TreeGrid source object from the Examples list
-
   // React event handler called when the component is rendered
   componentDidMount() {
     //window.StartTreeGrid(); // Processes all newly rendered <treegrid> / <bdo> tags on page, call it if the component is not mounted on page load
     // Uncomment this line to load TreeGrid dynamically from script. If used, remove the <treegrid> tag, the StartTreeGrid() call and the OnInit event that links grid to this class in constructor()
     //this.Grid = window.TreeGrid({ Debug:'check', id:'SampleGrid', Layout: { Url:"Layouts/StaticDef.js" }, Data: { Url:"Layouts/StaticData.js" }, ExportPDF:{Url:"http://localhost:8000/getpdf", Type:"Cfg,Def,Cols,All"} },"TreeGridMainTag",{ Component:this });
-  
   }
 
   // React event handler called when the component is being removed
@@ -73,18 +71,45 @@ class App extends React.Component {
     });
     return 1;
   }
-  handlebutton(Row,Col){
+  handlebutton(Row, Col) {
     // console.log("Row",Row)
-    // console.log("Col" , Col)
-    this.setState({Row:Row})
-    console.log(this.state.Row)
+    if (Col != "PagerPrev" || Col != "Reload") {
+      var G = this.Grid;
+      console.log("Col", Col);
+      console.log(this.state.Row);
+
+      this.setState({ Row: Row, Col: Col });
+
+      // G.Focus(Row,Col,null,null,0)
+    }
   }
   // Renders the whole sample page
-  addNewrow()
-  {
+  addNewrow() {
     var G = this.Grid;
     G.AddRow(null, this.state.Row, 1);
     // alert('hello')
+  }
+  hideColumn() {
+    if (this.state.Col !== "") {
+      var G = this.Grid;
+      G.HideCol(this.state.Col, 1);
+      this.setState({ Col: "" });
+    } else {
+      alert(
+        "Please click on any sell before clicking this button to hide that column"
+      );
+    }
+  }
+  clearFilter() {
+    var G = this.Grid;
+    G.ClearFilter(1);
+  }
+  handleExperiment() {
+    var G = this.Grid;
+    G.Reload();
+    console.log("Row", this.state.Row);
+    console.log("Col", this.state.Col);
+    // G.Focus(this.state.Row, this.state.Col,null,null,0)
   }
   render() {
     return (
@@ -93,7 +118,10 @@ class App extends React.Component {
 
         <div className="ExampleBorder">
           {/* TreeGrid main tag, it will contain the grid */}
-          <button onClick={()=>this.addNewrow()}>Add new Row</button>
+          <button onClick={() => this.addNewrow()}>Add new Row</button>
+          <button onClick={() => this.hideColumn()}>Hide the column</button>
+          <button onClick={() => this.clearFilter()}>Clear Filter</button>
+          <button onClick={() => this.Experiment()}>Testing</button>
           <div
             className="ExampleMain"
             style={{ width: "100%", height: "530px" }}
@@ -108,8 +136,8 @@ class App extends React.Component {
               debug="check"
               id="SampleGrid"
               layout_url="Layouts/ClientListDef.js"
-              data_url="http://192.168.1.50:8091/api/Client/1.0/GetListGrid/-1"
-              // data_url="Layouts/ClientListData.json"
+              // data_url="http://192.168.1.50:8091/api/Client/1.0/GetListGrid/-1"
+              data_url="Layouts/ClientListData.json"
               DE_Url="Grid/Languages/TextDE.xml"
               exportpdf_url="http://localhost:8000/getpdf"
               exportpdf_type="Cfg,Def,Cols,All"
