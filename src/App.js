@@ -136,7 +136,6 @@ class App extends React.Component {
               debug="check"
               id="SampleGrid"
               layout_url="Layouts/ClientListDef.js"
-              // data_url="http://192.168.1.50:8091/api/Client/1.0/GetListGrid/-1"
               data_url="Layouts/ClientListData.json"
               DE_Url="Grid/Languages/TextDE.xml"
               exportpdf_url="http://localhost:8000/getpdf"
